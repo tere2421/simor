@@ -1,0 +1,207 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Ingredient;
+use App\Models\Category;
+use Illuminate\Database\Seeder;
+
+class IngredientSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $cats = Category::pluck('id', 'name');
+
+        // [nama, kategori, satuan, stok, min, lokasi]
+        $data = [
+            // ── PROTEIN ──────────────────────────────────────────────────
+            ['MC - Marinated Chicken Skin',             'Protein',   'pack', 45,  15,  'Freezer 1'],
+            ['MC - Chicken Fillet',                     'Protein',   'pack', 8,   2,   'Freezer 1'],
+            ['AK - Ayam Geprek',                        'Protein',   'pack', 45,  5,   'Freezer 1'],
+            ['MC - Marinated Wingette and Drumette',    'Protein',   'pack', 150, 40,  'Freezer 1'],
+            ['MC - Marinated Whole Chicken (Kecil)',    'Protein',   'pack', 210, 50,  'Freezer 1'],
+            ['MC - Marinated Whole Chicken (Besar)',    'Protein',   'pack', 230, 50,  'Freezer 1'],
+            ['WIP - Marinated Red Chicken (Kecil)',     'Protein',   'pack', 100, 40,  'Freezer 1'],
+            ['WIP - Marinated Red Chicken (Besar)',     'Protein',   'pack', 110, 50,  'Freezer 1'],
+            ['WIP - Marinated Boneless Dada Slice',     'Protein',   'pack', 10,  3,   'Freezer 1'],
+
+            // ── FROZEN ───────────────────────────────────────────────────
+            ['SG - Egg Chicken Roll',                   'Frozen',    'pack', 5,   1,   'Freezer 2'],
+            ['SG - Chicken Katsu',                      'Frozen',    'pack', 7,   2,   'Freezer 2'],
+            ['Tteok',                                   'Frozen',    'pack', 8,   2,   'Freezer 2'],
+            ['Burger Bun',                              'Frozen',    'pack', 30,  5,   'Freezer 2'],
+            ['Shoestring French Fries',                 'Frozen',    'pack', 20,  5,   'Freezer 2'],
+            ['Odeng',                                   'Frozen',    'pack', 2,   0.5, 'Freezer 2'],
+            ['WIP - Dimsum',                            'Frozen',    'pack', 20,  3,   'Freezer 2'],
+            ['SG - Wortel Pickle',                      'Frozen',    'pack', 7,   2,   'Chiller B'],
+            ['MC - Marinated Meteor Chicken',           'Frozen',    'pack', 30,  10,  'Freezer 2'],
+
+            // ── BUMBU ────────────────────────────────────────────────────
+            ['WIP - Salted Egg Original',               'Bumbu',     'gram', 6600, 1000, 'Chiller A'],
+            ['WIP - Asam Manis Kecombrang',             'Bumbu',     'gram', 1800, 1000, 'Chiller A'],
+            ['WIP - Jumeokbap Premix',                  'Bumbu',     'gram', 3985, 2000, 'Dry Storage'],
+            ['HSS - Capsicum Oleoresin',                'Bumbu',     'botol', 2,  1,   'Dry Storage'],
+            ['AK - Sambal Matah',                       'Bumbu',     'pack', 60,  20,  'Chiller B'],
+            ['AC - Masala Sauce',                       'Bumbu',     'pack', 2,   1,   'Chiller A'],
+            ['WIP - Pickle Sauce',                      'Bumbu',     'pack', 4,   1,   'Chiller B'],
+            ['WIP - Sambal Wangi',                      'Bumbu',     'pack', 10,  3,   'Dry Storage'],
+            ['WIP - Maranggi Sauce',                    'Bumbu',     'pack', 3,   1,   'Chiller A'],
+            ['WIP - Garlic Oil Seasoning',              'Bumbu',     'pack', 10,  2,   'Chiller A'],
+            ['WIP - Szechuan Hot Sauce',                'Bumbu',     'pack', 3,   1,   'Chiller A'],
+            ['WIP - Bumbu Soto',                        'Bumbu',     'pack', 4,   7,   'Chiller A'],
+            ['WIP - Bumbu Hitam',                       'Bumbu',     'pack', 26,  15,  'Chiller A'],
+            ['WIP - Bumbu Sereh',                       'Bumbu',     'pack', 4,   1,   'Chiller A'],
+            ['WIP - Spicy BBQ Sauce',                   'Bumbu',     'pack', 3,   1,   'Chiller A'],
+            ['WIP - Bulgogi Sauce',                     'Bumbu',     'pack', 5,   1,   'Chiller A'],
+            ['WIP - Nashville Hot Sauce',               'Bumbu',     'pack', 6,   2,   'Chiller A'],
+            ['WIP - Ketumbar Sauce',                    'Bumbu',     'pack', 5,   2,   'Chiller A'],
+            ['WIP - Sambal Cabe Ijo',                   'Bumbu',     'pack', 40,  10,  'Chiller B'],
+            ['WIP - Truffle Mayo',                      'Bumbu',     'pack', 6,   2,   'Chiller B'],
+            ['WIP - Chicken Powder Mix',                'Bumbu',     'karton', 10, 2,  'Dry Storage'],
+            ['AK - Sambal Original',                    'Bumbu',     'pack', 80,  20,  'Dry Storage'],
+            ['AK - Sambal Korek',                       'Bumbu',     'pack', 70,  20,  'Chiller B'],
+            ['AK - Sambal Kecombrang',                  'Bumbu',     'pack', 30,  10,  'Dry Storage'],
+            ['AK - Sambal Kacang',                      'Bumbu',     'pack', 40,  10,  'Chiller B'],
+            ['AC - Indian Spice Sauce',                 'Bumbu',     'pack', 2,   1,   'Chiller A'],
+            ['AC - Sambal Accha',                       'Bumbu',     'pack', 50,  20,  'Chiller B'],
+            ['SG - Tare Sauce',                         'Bumbu',     'pack', 3,   1,   'Chiller A'],
+            ['MC - Tteokbokki Sauce',                   'Bumbu',     'pack', 26,  3,   'Chiller A'],
+            ['Koya Soto',                               'Bumbu',     'pack', 3,   2,   'Dry Storage'],
+
+            // ── DRY GOODS ────────────────────────────────────────────────
+            ['MC - Honey Garlic Sauce',                 'Dry Goods', 'gram', 60,  10,  'Dry Storage'],
+            ['WIP - Spicy Seasoning',                   'Dry Goods', 'gram', 2500, 1500, 'Dry Storage'],
+            ['Sweet Sour Sauce',                        'Dry Goods', 'pack', 6,   1,   'Dry Storage'],
+            ['Chili Sauce Delmonte',                    'Dry Goods', 'karton', 6, 1,   'Dry Storage'],
+            ['Minyak Goreng Sawit Pouch',               'Dry Goods', 'pack', 4,   1,   'Dry Storage'],
+            ['Mayonaise IM 10',                         'Dry Goods', 'pack', 3,   1,   'Dry Storage'],
+            ['WIP - Garlic Mayo',                       'Dry Goods', 'pack', 13,  5,   'Dry Storage'],
+            ['MC - Original Powder Mix',                'Dry Goods', 'karton', 6, 2,   'Dry Storage'],
+            ['MC - Battering Powder Mix',               'Dry Goods', 'karton', 16, 2,  'Dry Storage'],
+            ['MC - Snow Seasoning Powder',              'Dry Goods', 'pack', 3,   1,   'Dry Storage'],
+            ['MC - Cajun Seasoning',                    'Dry Goods', 'pack', 3,   1,   'Dry Storage'],
+            ['MC - Smoke Paprika Seasoning',            'Dry Goods', 'pack', 4,   1,   'Dry Storage'],
+            ['MC - Original Seasoning',                 'Dry Goods', 'pack', 5,   1,   'Dry Storage'],
+            ['MC - Korean Hot Sauce',                   'Dry Goods', 'pack', 60,  10,  'Dry Storage'],
+            ['MC - Gangjeong Sauce',                    'Dry Goods', 'pack', 10,  5,   'Dry Storage'],
+            ['Tomato Sauce Delmonte',                   'Dry Goods', 'pack', 13,  3,   'Dry Storage'],
+            ['Cheddar Cheese Sauce',                    'Dry Goods', 'pack', 7,   1,   'Dry Storage'],
+            ['Sesame Oil',                              'Dry Goods', 'pack', 1,   0.5, 'Dry Storage'],
+            ['Sesame Dressing Maestro',                 'Dry Goods', 'pack', 40,  15,  'Dry Storage'],
+            ['Tepung Sasa Crispy',                      'Dry Goods', 'karton', 5, 1,   'Dry Storage'],
+            ['Beras Natural',                           'Dry Goods', 'pack', 150, 30,  'Dry Storage'],
+            ['Beras Ketan',                             'Dry Goods', 'pack', 30,  8,   'Dry Storage'],
+            ['Cooking BBQ Sauce',                       'Dry Goods', 'pack', 5,   1,   'Dry Storage'],
+            ['WIP - Garlic Crack',                      'Dry Goods', 'pack', 13,  5,   'Dry Storage'],
+            ['WIP - Serundeng Sereh',                   'Dry Goods', 'pack', 4,   2,   'Dry Storage'],
+
+            // ── DAIRY ────────────────────────────────────────────────────
+            ['Dried Butterfly Pea Flower (Blue Tea)',   'Dairy',     'gram', 80,  40,  'Dry Storage'],
+            ['Lemon Concentrate',                       'Dairy',     'botol', 1,  1,   'Dry Storage'],
+            ['Instant Coffee Powder',                   'Dairy',     'pack', 15,  5,   'Dry Storage'],
+            ['Chatramue Thai Black Tea',                'Dairy',     'pack', 2,   0.5, 'Dry Storage'],
+            ['Condensed Milk',                          'Dairy',     'pack', 48,  10,  'Dry Storage'],
+            ['Creamer Powder',                          'Dairy',     'pack', 3,   1,   'Dry Storage'],
+            ['Rock Melon Powder',                       'Dairy',     'pack', 4,   1,   'Dry Storage'],
+            ['Strawberry Fruit Mix',                    'Dairy',     'pack', 6,   2,   'Dry Storage'],
+            ['Gula Pasir',                              'Dairy',     'pack', 30,  10,  'Dry Storage'],
+            ['Matcha Powder',                           'Dairy',     'pack', 2,   1,   'Dry Storage'],
+            ['Earl Grey Latte Powder',                  'Dairy',     'pack', 1,   0.5, 'Dry Storage'],
+            ['Chocolate Powder',                        'Dairy',     'pack', 2,   1,   'Dry Storage'],
+            ['Songkit Syrup',                           'Dairy',     'pack', 4,   1,   'Dry Storage'],
+            ['Soursop Syrup',                           'Dairy',     'pack', 5,   2,   'Dry Storage'],
+            ['Guava Syrup',                             'Dairy',     'pack', 2,   1,   'Dry Storage'],
+            ['Black Tea Bag',                           'Dairy',     'pack', 16,  3,   'Dry Storage'],
+            ['WIP - Milk Mixture Powder',               'Dairy',     'pack', 160, 20,  'Dry Storage'],
+            ['DP - Aren Mix',                           'Dairy',     'pack', 17,  3,   'Dry Storage'],
+
+            // ── SAYURAN ──────────────────────────────────────────────────
+            ['Mentimun',                                'Sayuran',   'gram', 14000, 4000, 'Chiller B'],
+            ['Kimchi Sawi',                             'Sayuran',   'pack', 4,   1,   'Chiller B'],
+            ['Kol Serut',                               'Sayuran',   'pack', 5,   2,   'Chiller B'],
+            ['Daanmuji',                                'Sayuran',   'pack', 4,   1,   'Chiller B'],
+            ['Telur',                                   'Sayuran',   'pcs',  275, 100, 'Dry Storage'],
+
+            // ── PACKAGING ────────────────────────────────────────────────
+            ['Box Bento 4 Compartment Merah LBHX-12',  'Packaging', 'pack', 3,   1,   'Dry Storage'],
+            ['Lunch Box Bawang Putri',                  'Packaging', 'pack', 2,   2,   'Dry Storage'],
+            ['Lunch Box TerSereh',                      'Packaging', 'pack', 3,   1,   'Dry Storage'],
+            ['Accha Box Large',                         'Packaging', 'pcs',  117, 50,  'Dry Storage'],
+            ['Lid Paper Bowl 12 oz',                    'Packaging', 'pack', 25,  6,   'Dry Storage'],
+            ['Printed Packaging Bowl 22oz Bu Tumbar',   'Packaging', 'pack', 1,   1,   'Dry Storage'],
+            ['Flag - TerSereh',                         'Packaging', 'pack', 5,   1,   'Dry Storage'],
+            ['Kitchen Towel SGP',                       'Packaging', 'pack', 11,  3,   'Dry Storage'],
+            ['Plastic Cup Hangry Oval 18 oz',           'Packaging', 'pack', 8,   2,   'Dry Storage'],
+            ['Kertas Thermal Sticker 50mm x 35mm',      'Packaging', 'pack', 11,  2,   'Dry Storage'],
+            ['MC - Medium Box New Design',              'Packaging', 'pack', 15,  3,   'Dry Storage'],
+            ['Sealer Plastic Printed',                  'Packaging', 'pack', 2,   1,   'Dry Storage'],
+            ['MC Flavors Flag - Moon Original',         'Packaging', 'pack', 6,   1,   'Dry Storage'],
+            ['Flag - Maranggi',                         'Packaging', 'pack', 1,   1,   'Dry Storage'],
+            ['Lunch Box Bento',                         'Packaging', 'pack', 3,   1,   'Dry Storage'],
+            ['Flag - Salted Lab',                       'Packaging', 'pack', 1,   0.5, 'Dry Storage'],
+            ['MC Flavors Flag - K-Jun',                 'Packaging', 'pack', 2,   1,   'Dry Storage'],
+            ['MC Flavors Flag - Ground Zero',           'Packaging', 'pack', 1,   0.5, 'Dry Storage'],
+            ['Cup 350 ML Square',                       'Packaging', 'pack', 20,  4,   'Dry Storage'],
+            ['Multifold Tissue',                        'Packaging', 'pack', 48,  8,   'Dry Storage'],
+            ['Seal Tape Logo Hangry!',                  'Packaging', 'pcs',  36,  6,   'Dry Storage'],
+            ['Sauce cup 25ml round',                    'Packaging', 'karton', 3, 1,   'Dry Storage'],
+            ['MC - Moonbox New Design',                 'Packaging', 'pack', 1,   0.3, 'Dry Storage'],
+            ['Printed Packaging Lunch Box Bu Tumbar',   'Packaging', 'pack', 12,  2,   'Dry Storage'],
+            ['Flag - UNO',                              'Packaging', 'pack', 1,   0.3, 'Dry Storage'],
+            ['Flag - Roro Combrang',                    'Packaging', 'pack', 2,   0.5, 'Dry Storage'],
+            ['Flag - Accha',                            'Packaging', 'pack', 1,   0.3, 'Dry Storage'],
+            ['Sauce Cup 35 ml Round',                   'Packaging', 'pack', 6,   3,   'Dry Storage'],
+            ['MC Flavors Flag - Big Bang',              'Packaging', 'pack', 11,  1,   'Dry Storage'],
+            ['Plastic Cup Hangry Oval 12/14 oz',        'Packaging', 'pack', 40,  10,  'Dry Storage'],
+            ['Lid Paper Bowl 22/27 oz',                 'Packaging', 'pack', 60,  20,  'Dry Storage'],
+            ['Medium Box Universal Hangry',             'Packaging', 'pack', 20,  2,   'Dry Storage'],
+            ['MC Flavor Flag - Cheezy Stardust',        'Packaging', 'pack', 2,   1,   'Dry Storage'],
+            ['Large Box - Hot Side Story',              'Packaging', 'pack', 2,   1,   'Dry Storage'],
+            ['Packaging New Shape - UNO',               'Packaging', 'pack', 10,  2,   'Dry Storage'],
+            ['Paper Bowl 12 oz',                        'Packaging', 'pack', 20,  4,   'Dry Storage'],
+            ['Flag - San Gyu',                          'Packaging', 'pack', 2,   0.5, 'Dry Storage'],
+            ['MC - Partisi Moon Box New Design',        'Packaging', 'pack', 1,   0.5, 'Dry Storage'],
+            ['Sleeve Bento SanGyu (New)',               'Packaging', 'pack', 4,   1,   'Dry Storage'],
+            ['MC - Bowl 27 oz New Design',              'Packaging', 'pack', 1,   0.3, 'Dry Storage'],
+            ['Lid Box Bento 4 Compartment Merah LBHX-12','Packaging','pack', 7,   1,   'Dry Storage'],
+            ['Paper Bowl - 22 Oz Hangry!',              'Packaging', 'pack', 20,  4,   'Dry Storage'],
+            ['Sleeve Bishi Bento 45cm',                 'Packaging', 'pack', 4,   1,   'Dry Storage'],
+            ['Lid Lunch Box Bento',                     'Packaging', 'pack', 3,   1,   'Dry Storage'],
+            ['MC - Large Box New Shape',                'Packaging', 'pack', 16,  4,   'Dry Storage'],
+            ['Paper Bowl 22 oz',                        'Packaging', 'pack', 5,   2,   'Dry Storage'],
+            ['Paper Bowl 27 oz',                        'Packaging', 'pack', 2,   1,   'Dry Storage'],
+            ['Sleeve Bishi Bento 43cm',                 'Packaging', 'pack', 8,   2,   'Dry Storage'],
+            ['Flag - Mak Dura',                         'Packaging', 'pack', 32,  10,  'Dry Storage'],
+            ['Flag - Barendang',                        'Packaging', 'pack', 2,   1,   'Dry Storage'],
+            ['Struk Thermal POS uk. 80 x 80 mm',        'Packaging', 'pack', 230, 15,  'Dry Storage'],
+            ['MC Flavors Flag - Honey Garlaxy',         'Packaging', 'pack', 9,   1,   'Dry Storage'],
+            ['Medium Box - Hot Side Story',             'Packaging', 'pack', 4,   1,   'Dry Storage'],
+            ['Flag - Jeniper (Soto)',                   'Packaging', 'pack', 3,   1,   'Dry Storage'],
+            ['Lunch Box Hangry!',                       'Packaging', 'pack', 20,  2,   'Dry Storage'],
+            ['Lunch Box Mak Dura',                      'Packaging', 'pack', 40,  3,   'Dry Storage'],
+            ['MC Flavors Flag - Smokey Comet',          'Packaging', 'pack', 4,   1,   'Dry Storage'],
+            ['Packaging Box - Ayam Koplo',              'Packaging', 'pack', 26,  3,   'Dry Storage'],
+            ['Cable Ties',                              'Packaging', 'pack', 20,  8,   'Dry Storage'],
+            ['Flag - Bawang Putri',                     'Packaging', 'pack', 4,   1,   'Dry Storage'],
+            ['Flag - Ayam Goreng Habibi',               'Packaging', 'pack', 1,   0.5, 'Dry Storage'],
+            ['Pouch Fries',                             'Packaging', 'pack', 3,   1,   'Dry Storage'],
+            ['MC Flavors Flag - Gangjeong',             'Packaging', 'pack', 4,   1,   'Dry Storage'],
+            ['MC - Marinated Wingette and Drumette',    'Packaging', 'pack', 150, 40,  'Freezer 1'],
+        ];
+
+        foreach ($data as [$name, $catName, $unit, $stock, $min, $location]) {
+            // Skip duplicate
+            if (Ingredient::where('name', $name)->exists()) continue;
+
+            Ingredient::create([
+                'category_id'         => $cats[$catName],
+                'name'                => $name,
+                'unit'                => $unit,
+                'current_stock'       => $stock,
+                'min_stock_threshold' => $min,
+                'storage_location'    => $location,
+                'is_active'           => true,
+            ]);
+        }
+    }
+}
